@@ -1,0 +1,97 @@
+<%- include('../partials/userPartials/header.ejs') %>
+
+	<!-- breadcrumb -->
+	<div class="container pt-lg-5 mb-5">
+		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+			<a href="/" class="stext-109 cl8 hov-cl1 trans-04">
+				Home
+				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+			</a>
+
+			<span class="stext-109 cl4">
+				Order
+			</span>
+		</div>
+	</div>
+
+  <div class="container my-5">
+    <table class="table table-striped my-5">
+      <thead>
+        <tr>
+          <th scope="col">OrderId</th>
+          <th scope="col">Date</th>
+          <th scope="col">address</th>
+          <th scope="col">Paid</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Payment</th>
+          <th scope="col">Status</th>
+          <th scope="col">Cancel</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%
+        if(orderData.length>0){
+          for(let i=0;i<orderData.length;i++){
+          %>
+          <tr>
+            <td><%=orderData[orderData.length-i-1]._id%></td>
+            <td><%=orderData[orderData.length-i-1].date.toISOString().substring(0,10)%></td>
+            <td><%=orderData[orderData.length-i-1].deliveryAddress%></td>
+            <td><%=orderData[orderData.length-i-1].totalAmount%></td>
+            <td><%=orderData[orderData.length-i-1].Amount%></td>
+            <td><%=orderData[orderData.length-i-1].paymentMethod%></td>
+            <td><%=orderData[orderData.length-i-1].status%></td>
+            <td><%
+              if(orderData[orderData.length-i-1].status=="Delivered"){
+                %>
+                <div class="">
+                  <button class="btn btn-danger py-2 px-3" onclick="Cancel('<%=orderData[orderData.length-i-1]._id%>')">Return Order</button>
+                </div>
+                <%
+              }else{
+                %>
+                <div class="">
+                  <% if(orderData[orderData.length-i-1].status=="Cancelled"){ %>
+                    <button class="btn btn-danger py-2 px-3" onclick="Cancel('<%=orderData[orderData.length-i-1]._id%>')" disabled>Cancel Order</button>
+                  <% } else { %>
+                    <button class="btn btn-danger py-2 px-3" onclick="Cancel('<%=orderData[orderData.length-i-1]._id%>')">Cancel Order</button>
+                  <% } %>
+                </div>
+                <%
+              }
+            %></td>
+            <td><a href="/viewOrderProducts?id=<%=orderData[orderData.length-i-1]._id%>" class="btn btn-primary py-2 px-3">View Product</a></td>
+          </tr>
+          <%
+        }
+        }else{
+          %>
+          <tr>
+            <td colspan="7"><p>No orders</p></td>
+          </tr>
+          <%
+        }
+        %>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    function Cancel(orderId){
+      $.ajax({
+        url:"/cancelOrder",
+        data:{
+          orderId,
+        },
+        method:"post",
+        success:(responce)=>{
+          if(responce.success){
+            location.reload();
+          }
+        }
+      })
+    }
+  </script>
+
+<%- include('../partials/userPartials/footer.ejs') %>

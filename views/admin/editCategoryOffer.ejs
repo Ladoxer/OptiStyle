@@ -1,0 +1,103 @@
+<%- include('../partials/adminPartials/header.ejs') %>
+
+<div class="container-fluid py-4">
+  <a href="/admin/categoryOffer" class="btn btn-success">Back</a>
+  <div class="row">
+    <div class="col-12">
+      <div class="card my-4">
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+          <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+            <h6 class="text-white text-capitalize ps-3">Edit Category Offer</h6>
+          </div>
+        </div>
+        <div class="card-body px-5 pb-2">
+          <form id="addOfferForm" enctype="multipart/form-data">
+
+            <div class="form-group mx-3 my-2 d-flex align-items-center justify-content-center">
+              <span class="font-weight-bolder" for="title">Title</span>
+              <input type="text" class="form-control px-1" id="title" value="<%= data.title %>" name="title" required>
+            </div>
+
+            <div class="form-group mx-3 my-2 d-flex align-items-center justify-content-center">
+              <span class="font-weight-bolder" for="description">Description</span>
+              <textarea class="form-control px-1" id="description" name="description" placeholder="Enter the description" required><%= data.description %></textarea>
+            </div>
+
+            <div class="form-group mx-3 my-2 d-flex align-items-center justify-content-center">
+              <span class="font-weight-bolder" for="category">Category</span>
+              <select name="category" id="category" class="form-control px-1">
+                <option value="<%= data.category._id %>"><%= data.category.categoryName %></option>
+                <% categories.forEach((category) => { %>
+                  <% if(category._id !== data.category._id) { %>
+                    <option value="<%= category._id %>"><%= category.categoryName %></option>
+                  <% } %>
+                <% }) %>
+              </select>
+            </div>
+
+            <div class="form-group mx-3 my-2 d-flex align-items-center justify-content-center">
+              <span class="font-weight-bolder" for="discountPercentage">Discount Percentage( % )</span>
+              <input type="number" class="form-control px-1" id="discountPercentage" value="<%= data.discountPercentage %>" name="discountPercentage" required>
+            </div>
+
+            <div class="form-group mx-3 my-2 d-flex align-items-center justify-content-center">
+              <span class="font-weight-bolder" for="startDate">Start Date</span>
+              <input type="date" class="form-control px-1" value="<%= data.startDate.toISOString().substr(0,10) %>" id="startDate" name="startDate" required>
+            </div>
+
+            <div class="form-group mx-3 my-2 d-flex align-items-center justify-content-center">
+              <span class="font-weight-bolder" for="endDate">End Date</span>
+              <input type="date" class="form-control px-1" value="<%= data.endDate.toISOString().substr(0,10) %>" id="endDate" name="endDate" required>
+            </div>
+
+            <input type="hidden" name="id" value="<%= data._id %>">
+            <button class="btn btn-primary my-3" type="button" onclick="updateCategoryOffer()">Update</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+    function updateCategoryOffer(){
+
+      var formData = $('#addOfferForm').serialize();
+      console.log(formData);
+
+      if(formData.discountPercentage < 0 || formData.discountPercentage > 100){
+        Swal.fire({
+          title:"Oops",
+          text:"Wrong discount percentage selected!",
+          icon:"error",
+        })
+        return;
+      }
+
+      $.ajax({
+        url:'/admin/editCategoryOffer',
+        method:'post',
+        data:formData,
+        success:(responce)=>{
+          console.log(responce);
+          if(responce.error){
+            Swal.fire({
+              icon:'error',
+              title:'error :'+responce.error,
+            })
+          }else{
+            Swal.fire({
+              icon:'success',
+              title:'Offer Added',
+              text:'Congratulations! The Offer has been successfully updated.'
+            });
+            window.location.href = '/admin/categoryOffer';
+          }
+        }
+      })
+
+    }
+</script>
+
+<%- include('../partials/adminPartials/footer.ejs') %>

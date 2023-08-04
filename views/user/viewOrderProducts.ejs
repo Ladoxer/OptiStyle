@@ -1,0 +1,58 @@
+<%- include('../partials/userPartials/header.ejs') %>
+
+	<!-- breadcrumb -->
+	<div class="container pt-lg-5 my-5">
+		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+			<a href="/" class="stext-109 cl8 hov-cl1 trans-04">
+				Home
+				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+			</a>
+
+			<span class="stext-109 cl4">
+				Order Products
+			</span>
+		</div>
+	</div>
+
+  <div class="container my-5 py-5">
+    <div class="row">
+      <div class="col-md-8 col-lg-10 order-md-last">
+        <div class="row">
+          <%
+          if(products.length>0){
+            products.forEach((pro)=>{
+              %>
+              <div class="col-12 col-lg-4 d-flex">
+                <div class="product d-flex flex-column card">
+                  <div style="width: 286px; height: 214px;">
+                    <img class="img-fluid" src="/adminAsset/productImages/<%=pro.productId.image[0]%>" alt="<%=pro.productId.image[0]%>" style="width: 286px; height: 214px;">
+                  </div>
+                  <div class="text py-3 pb-4 px-3">
+                    <h3><a href="#"><%=pro.productId.productName%></a></h3>
+                    <div>
+                      <p><span>₹ <%=pro.productPrice%></span></p>
+                    </div>
+                    <div>
+                      <p><span>Quantity <%=pro.count%></span></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <%
+            })
+          }else{
+            %>
+            <p style="color: red;font-family: Georgia, 'Times New Roman', Times, serif;font-size: 18px; padding: 100px 0px 100px 400px;"><%=message%></p>
+            <%
+          }
+          %>
+          <!-- <div>
+            <h3>Total amount</h3>
+            <h4>₹ <%= orderId.totalAmount %></h4>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+<%- include('../partials/userPartials/footer.ejs') %>

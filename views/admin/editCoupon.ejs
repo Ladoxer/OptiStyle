@@ -1,0 +1,71 @@
+<%- include('../partials/adminPartials/header.ejs') %>
+
+<div class="container-fluid py-4">
+  <a href="/admin/listCoupon" class="btn btn-success">Back</a>
+  <div class="row">
+    <div class="col-12">
+      <div class="card my-4">
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+          <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+            <h6 class="text-white text-capitalize ps-3">Edit Coupon</h6>
+          </div>
+        </div>
+        <div class="card-body px-5 pb-2">
+          <form action="" method="post">
+            <div class="form-group mx-3 my-2 d-flex align-items-center justify-content-center">
+              <span class="font-weight-bolder" for="code">Code</span>
+              <input type="text" class="form-control px-3" id="code" name="code" value="<%= coupon.code %>" required>
+            </div>
+
+            <div class="form-group mx-3 my-2 d-flex align-items-center justify-content-center">
+              <span for="discountType" class="font-weight-bolder" >Discount Type</span>
+              <select name="discountType" id="discountType" class="form-control px-1">
+                <option><%= coupon.discountType %></option>
+                <option >Fixed</option>
+                <option >Percentage Type</option>
+              </select>
+            </div>
+
+            <div class="form-group mx-3 my-2 d-flex align-items-center justify-content-center">
+              <span class="font-weight-bolder" for="amount">Discount Amount</span>
+              <input type="number" class="form-control px-1" id="amount" name="amount" value="<%= coupon.discountAmount %>" required>
+            </div>
+
+            <div class="form-group mx-3 my-2 d-flex align-items-center justify-content-center">
+              <span class="font-weight-bolder" for="date">Expiry Date</span>
+              <input type="date" class="form-control px-1" value="<%= coupon.expiryDate %>" id="date" name="date" required>
+            </div>
+
+            <div class="form-group mx-3 my-2 d-flex align-items-center justify-content-center">
+              <span class="font-weight-bolder" for="cartAmount">Max Cart Amount</span>
+              <input type="number" class="form-control px-1" id="cartAmount" name="cartAmount" value="<%= coupon.maxCartAmount %>" required>
+            </div>
+
+            <div class="form-group mx-3 my-2 d-flex align-items-center justify-content-center">
+              <span class="font-weight-bolder" for="discountAmount">Max Discount Amount</span>
+              <input type="number" class="form-control px-1" id="discountAmount" name="discountAmount" value="<%= coupon.maxDiscountAmount %>" required>
+            </div>
+
+            <div class="form-group mx-3 my-2 d-flex align-items-center justify-content-center">
+              <span class="font-weight-bolder" for="couponCount">Max Coupons</span>
+              <input type="number" class="form-control px-1" id="couponCount" name="couponCount" value="<%= coupon.maxUsers %>" required>
+            </div>
+
+            <%
+            if(typeof message !== 'undefined'){
+              %>
+              <p id="para" style="color: red;"><%= message %></p>
+              <%
+            }
+            %>
+            <input class="btn btn-success my-3" type="submit" onclick="show()" value="Submit">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<%- include('../partials/adminPartials/footer.ejs') %>

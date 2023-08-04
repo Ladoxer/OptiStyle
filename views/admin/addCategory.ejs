@@ -1,0 +1,44 @@
+<%- include('../partials/adminPartials/header.ejs') %>
+
+<div class="container-fluid py-4">
+  <a href="/admin/listCategory" class="btn btn-success">Back</a>
+  <div class="row">
+    <div class="col-12">
+      <div class="card my-4">
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+          <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+            <h6 class="text-white text-capitalize ps-3">Add Category</h6>
+          </div>
+        </div>
+        <div class="card-body px-5 pb-2">
+          <form action="" method="post">
+            <div class="form-group">
+              <label class="font-weight-bolder" for="category">Category</label>
+              <input type="text" class="form-control px-1" id="category" name="categoryName" placeholder="Enter category" required>
+            </div>
+            <%
+            if(typeof message !== 'undefined'){
+              %>
+              <p id="para" style="color: red;"><%= message %></p>
+              <%
+            }
+            %>
+            <input class="btn btn-success my-3" type="submit" onclick="show()" value="Submit">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    function show(){
+      let category = document.getElementById('category').value;
+      let para = document.getElementById('para');
+      if(category!==String){
+        para.innerText = "Enter Something"
+      }
+    }
+</script>
+
+<%- include('../partials/adminPartials/footer.ejs') %>

@@ -1,0 +1,92 @@
+<%- include('../partials/adminPartials/header.ejs') %>
+
+<div class="container-fluid py-4">
+  <a href="/admin/productList" class="btn btn-success">Back</a>
+  <div class="row">
+    <div class="col-12">
+      <div class="card my-4">
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+          <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+            <h6 class="text-white text-capitalize ps-3">Add Product</h6>
+          </div>
+        </div>
+        <div class="card-body px-5 pb-2">
+          <form action="" method="post" enctype="multipart/form-data">
+            <div class="form-group mx-3 my-2 d-flex align-items-center justify-content-center">
+              <span class="font-weight-bolder" for="productName">Product Name</span>
+              <input type="text" class="form-control px-1" id="productName" name="productName" placeholder="Enter the product name" required>
+            </div>
+
+            <div class="form-group mx-3 my-2 d-flex align-items-center justify-content-center">
+              <span for="status" class="font-weight-bolder" >Status</span>
+              <select name="status" id="status" class="form-control px-1">
+                <option >In Stock</option>
+                <option >Out Of Stock</option>
+              </select>
+            </div>
+
+            <div class="form-group mx-3 my-2 d-flex align-items-center justify-content-center">
+              <span class="font-weight-bolder" for="price">Price</span>
+              <input type="number" class="form-control px-1" id="price" name="price" placeholder="Enter price" required>
+              <p id="para" class="text-danger"></p>
+            </div>
+            
+            <div class="form-group mx-3 my-2 d-flex align-items-center justify-content-center">
+              <span class="font-weight-bolder" for="image">Image</span>
+              <input type="file" class="form-control px-1" id="image" name="image" multiple required>
+              <p id="para1" class="text-danger"></p>
+            </div>
+
+            <div class="form-group mx-3 my-2 d-flex align-items-center justify-content-center">
+              <span class="font-weight-bolder" for="category">Category</span>
+              <select name="category" id="category" class="form-control px-1">
+                <%
+                if(category.length>0){
+                  for(let i=0;i<category.length;i++){
+                    %>
+                    <option value="<%= category[i]._id %>"><%= category[i].categoryName %></option>
+                    <%
+                  }
+                }
+                %>
+              </select>
+            </div>
+            
+            <div class="form-group mx-3 my-2 d-flex align-items-center justify-content-center">
+              <span class="font-weight-bolder" for="stockQuantity">Stock Quantity</span>
+              <input type="number" class="form-control px-1" id="stockQuantity" name="stockQuantity" placeholder="Enter here" required>
+              <p id="para2" class="text-danger"></p>
+            </div>
+
+            <div class="form-group mx-3 my-2 d-flex align-items-center justify-content-center">
+              <span class="font-weight-bolder" for="description">description</span>
+              <input type="text" class="form-control px-1" id="description" name="description" placeholder="Enter description" required>
+              <p id="para3" class="text-danger"></p>
+            </div>
+
+            <%
+            if(typeof message !== 'undefined'){
+              %>
+              <p id="para" style="color: red;"><%= message %></p>
+              <%
+            }
+            %>
+            <input class="btn btn-success my-3" type="submit" onclick="show()" value="Submit">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    function show(){
+      let category = document.getElementById('category').value;
+      let para = document.getElementById('para');
+      if(category!==String){
+        para.innerText = "Enter Something"
+      }
+    }
+</script>
+
+<%- include('../partials/adminPartials/footer.ejs') %>

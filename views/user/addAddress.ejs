@@ -1,0 +1,98 @@
+<%- include('../partials/userPartials/header.ejs') %>
+
+<!-- breadcrumb -->
+<div class="container pt-lg-5">
+  <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+    <a href="/" class="stext-109 cl8 hov-cl1 trans-04">
+      Home
+      <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+    </a>
+
+    <span class="stext-109 cl4"> Add Address </span>
+  </div>
+</div>
+
+<section class="ftco-section bg-light py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 vw-100 ">
+        <form action="" class="bg-white p-5 contact-form" method="post">
+          <h2 class="my-3">Add Address</h2>
+          <div class="form-group">
+            <input type="text" class="form-control" name="userName" id="input1" placeholder="Your Name" required>
+            <p id="para1" style="color: red;"></p>
+          </div>
+          <div class="form-group">
+            <input type="number" class="form-control" name="mobile" id="input2" placeholder="Your mobile" required>
+            <p id="para2" style="color: red;"></p>
+          </div>
+          <div class="form-group">
+            <input type="number" class="form-control" name="alterMobile" id="input3" placeholder="Your Alternative number" required>
+            <p id="para3" style="color: red;"></p>
+          </div>
+          <div class="form-group">
+            <textarea name="address" id="input4" class="col-md-12 form-control" rows="3" placeholder="Enter Address"></textarea>
+            <p id="para4" style="color: red;"></p>
+          </div>
+          <div class="form-group">
+            <input type="text" id="input5" name="city" placeholder="Your city" class="form-control" required>
+            <p id="para5" style="color: red;"></p>
+          </div>
+          <div class="form-group">
+            <input type="text" id="input6" name="state" placeholder="Your state" class="form-control" required>
+            <p id="para6" style="color: red;"></p>
+          </div>
+          <div class="form-group">
+            <input type="number" id="input7" name="pincode" placeholder="Your pincode" class="form-control" required>
+            <p id="para7" style="color: red;"></p>
+          </div>
+          <div class="form-group">
+            <input type="text" id="input8" name="landmark" placeholder="Your landmark" class="form-control" required>              
+            <p id="para8" style="color: red;"></p>
+          </div>
+          <div class="form-group text-center">
+            <input type="submit" onclick="show()" value="Register" class="btn btn-primary py-3 px-5">
+          </div>
+          <div class="text-center">
+            <%
+          if(typeof message != 'undefined'){
+            %>
+            <p style="color: green;"><%=message%></p>
+            <%
+          }
+          %>
+          </div>
+        </form>
+      
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function show(){
+    let input1 = document.getElementById('input1').value.trim();
+    let para1 = document.getElementById('para1');
+    if(input1 === ''){
+      para1.innerText = "Enter something";
+    }
+    let input2 = document.getElementById('input2').value.trim();
+    let para2 = document.getElementById('para1');
+    if(input2 === ''){
+      para2.innerText = "Enter something";
+    }
+    let input3 = document.getElementById('input3').value.trim();
+    let para3 = document.getElementById('para1');
+    if(input3 === ''){
+      para3.innerText = "Enter something";
+    }
+    let input4 = document.getElementById('input4').value.trim();
+    let para4 = document.getElementById('para1');
+    if(input4 === ''){
+      para4.innerText = "Enter something";
+    }
+  }  
+</script>
+
+
+<%- include('../partials/userPartials/footer.ejs') %>

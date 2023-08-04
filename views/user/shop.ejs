@@ -1,0 +1,240 @@
+<%- include('../partials/userPartials/header.ejs') %>
+
+
+	
+	<!-- Product -->
+	<div class="bg0 m-t-23 p-b-140 mt-md-5 pt-md-3">
+		<div class="container mt-md-5">
+			<div class="flex-w flex-sb-m p-b-52">
+				
+				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
+					<form action="/shop" method="get">
+					<a class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" href="/shop?category=All&value=<%= price %>&search=<%= Search %>" >
+						All Products
+					</a>
+
+
+
+					<% category.forEach((value)=>{%>
+						<a class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" href="/shop?category=<%= value.categoryName %>&value=<%= price %>&search=<%= Search %>" >
+							<%= value.categoryName %>
+						</a>
+					<% }) %>	
+
+
+				</div>
+
+				<div class="flex-w flex-c-m m-tb-10">
+					<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
+						<i class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
+						<i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+						 Filter
+					</div>
+
+					<div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
+						<i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
+						<i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+						Search
+					</div>
+				</div>
+				
+				<!-- Search product -->
+				<div class="dis-none panel-search w-full p-t-10 p-b-15">
+					<div class="bor8 dis-flex p-l-15">
+						
+						
+							<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search" placeholder="Search">
+							<input type="hidden" name="category" value="<%= cat %>">	
+						<button type="submit" class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+							<i class="zmdi zmdi-search"></i>
+						</button>
+					</div>	
+				</div>
+
+				<!-- Filter -->
+				<div class="dis-none panel-filter w-full p-t-10">
+					<div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
+						<div class="filter-col1 p-r-15 p-b-27">
+							<div class="mtext-102 cl2 p-b-15">
+								Sort By
+							</div>
+
+							<ul>
+								<li class="p-b-6">
+									<a href="#" class="filter-link stext-106 trans-04">
+										Default
+									</a>
+								</li>
+
+								<li class="p-b-6">
+									<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
+										Newness
+									</a>
+								</li>
+
+								<li class="p-b-6">
+									<a href="/shop?value=Low&category=<%= cat %>&search=<%= Search %>" class="filter-link <% if(price == "Low"){ %>filter-link-active<% }%>  stext-106 trans-04">
+										Price: Low to High
+									</a>
+								</li>
+
+								<li class="p-b-6">
+									<a href="/shop?value=High&category=<%= cat %>&search=<%= Search %>" class="filter-link <% if(price == "High"){ %>filter-link-active<% }%> stext-106 trans-04">
+										Price: High to Low
+									</a>
+								</li>
+							</ul>
+						</div>
+
+						<div class="filter-col2 p-r-15 p-b-27">
+							<div class="mtext-102 cl2 p-b-15">
+								Price
+							</div>
+
+							<ul>
+								<li class="p-b-6">
+									<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
+										All
+									</a>
+								</li>
+
+								<li class="p-b-6">
+									<a href="#" class="filter-link stext-106 trans-04">
+										$0.00 - $50.00
+									</a>
+								</li>
+
+								<li class="p-b-6">
+									<a href="#" class="filter-link stext-106 trans-04">
+										$50.00 - $100.00
+									</a>
+								</li>
+
+								<li class="p-b-6">
+									<a href="#" class="filter-link stext-106 trans-04">
+										$100.00 - $150.00
+									</a>
+								</li>
+
+								<li class="p-b-6">
+									<a href="#" class="filter-link stext-106 trans-04">
+										$150.00 - $200.00
+									</a>
+								</li>
+
+								<li class="p-b-6">
+									<a href="#" class="filter-link stext-106 trans-04">
+										$200.00+
+									</a>
+								</li>
+							</ul>
+						</div>
+
+						
+
+						
+					</div>
+				</div>
+			</form>
+			</div>
+
+			<div class="row isotope-grid">
+
+				<%
+					for(let i=0;i<product.length;i++){
+						%>
+
+						<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+					
+					<div class="block2">
+						<div class="block2-pic hov-img0" style="width: 270px; height: 334.35px;">
+							<img class="img-fluid"  src="/adminAsset/productImages/<%=product[i].image[0]%>" alt="IMG-PRODUCT">
+
+							 <a href="/productDetail?id=<%=product[i]._id%>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+								View
+							</a> 
+						</div>
+
+						<div class="block2-txt flex-w flex-t p-t-14">
+							<div class="block2-txt-child1 flex-col-l ">
+								<a href="/productDetail?id=<%=product[i]._id%>" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									<%=product[i].productName%>
+								</a>
+
+								<div>
+								<% const proOfferMatch = productOffer.find((x) => x.productName.equals(product[i]._id)); %>
+								<% const offerMatch = categoryOffer.find((x) => x.category._id.equals(product[i].category)); %>
+								<% if(proOfferMatch && offerMatch){ %>
+									<span class="stext-105 cl3">₹<%= (product[i].price - ((product[i].price * (offerMatch.discountPercentage + proOfferMatch.discountPercentage))/100)).toFixed(2) %></span>
+									<span class="text-secondary stext-105 cl3"><s>₹<%= product[i].price.toFixed(2) %></s></span>
+									<span class="text-success stext-105 cl3"><%= offerMatch.discountPercentage + proOfferMatch.discountPercentage %>% off</span>
+									
+								<% } else if(proOfferMatch && !offerMatch){ %>
+									<span class="stext-105 cl3">₹<%= (product[i].price - ((product[i].price * proOfferMatch.discountPercentage)/100)).toFixed(2) %></span>
+									<span class="text-secondary stext-105 cl3"><s>₹<%= product[i].price.toFixed(2) %></s></span>
+									<span class="text-success stext-105 cl3"><%= proOfferMatch.discountPercentage %>% off</span>
+									
+								<% } else if(offerMatch && !proOfferMatch){ %>
+									<span class="stext-105 cl3">₹<%= (product[i].price - ((product[i].price * offerMatch.discountPercentage)/100)).toFixed(2) %></span>
+									<span class="text-secondary stext-105 cl3"><s>₹<%= product[i].price.toFixed(2) %></s></span>
+									<span class="text-success stext-105 cl3"><%= offerMatch.discountPercentage %>% off</span>
+									
+								<% } else { %>
+									<span class="stext-105 cl3">₹<%= product[i].price.toFixed(2) %></span>
+								<% } %>	
+
+							  </div>
+							</div>
+
+							<div class="block2-txt-child2 flex-r p-t-3">
+								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+									<img class="icon-heart1 dis-block trans-04" src="userAsset/images/icons/icon-heart-01.png" alt="ICON">
+									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="userAsset/images/icons/icon-heart-02.png" alt="ICON">
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+						<%
+					}
+				%>
+				
+			</div>
+
+			<div class="flex-c-m p-t-45">
+				<ul class="pagination pagination-primary">
+				<% for(let i=0;i<totalPage;i++){ %>
+					<% if(i+1 == page){ %>
+						<li class="page-item active">
+						<a href="/shop?page=<%= i+1 %>&value=<%= price %>&category=<%= cat %>&search=<%= Search %>" class="  ">
+					   <%= i+1 %>
+						</a>
+					  </li>
+					<% }else{ %>
+						<li class="page-item">
+						<a href="/shop?page=<%= i+1 %>&value=<%= price %>&category=<%= cat %>&search=<%= Search %>" class=" stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 ">
+					   <%= i+1 %>
+						</a>
+						</li>
+					<% } %>
+				<% } %>
+				</ul>
+			</div>
+		</div>
+	</div>
+		
+
+	
+
+
+	<!-- Back to top -->
+	<div class="btn-back-to-top" id="myBtn">
+		<span class="symbol-btn-back-to-top">
+			<i class="zmdi zmdi-chevron-up"></i>
+		</span>
+	</div>
+
+
+
+<%- include('../partials/userPartials/footer.ejs') %>

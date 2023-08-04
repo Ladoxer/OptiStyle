@@ -1,0 +1,48 @@
+<%- include('../partials/adminPartials/header.ejs') %>
+
+<div class="container-fluid py-4">
+  <a class="btn btn-primary" href="/admin/orders">Back</a>
+  <div class="row">
+    <div class="col-12">
+      <div class="card my-4">
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+          <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+            <h6 class="text-white text-capitalize ps-3">Edit Order Status</h6>
+          </div>
+        </div>
+        <div class="card-body px-0 pb-2">
+          <div class="table-responsive p-0">
+            <form action="" method="post">
+              <div class="px-4 py-3 mb-8">
+                <label class="block mt-4 text-sm" for="status">
+                  <span class="text-dark">
+                    Status
+                  </span>
+                  <select class="block w-full mt-1 text-sm form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="status" id="status">
+                    <option><%= orderData.status %></option>
+                    <option>Placed</option>
+                    <option>Pending</option>
+                    <option>Shipped</option>
+                    <option>Delivered</option>
+                  </select>
+                </label>
+
+                <input type="submit" value="Submit" class="block w-full mt-1 text-sm btn btn-success">
+                <%
+                if(typeof message !== 'undefined'){
+                  %>
+                  <p class="text-danger"><%=message%></p>
+                  <%
+                }
+                %>
+
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/adminPartials/footer.ejs') %>

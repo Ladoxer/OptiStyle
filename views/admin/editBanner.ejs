@@ -1,0 +1,56 @@
+<%- include('../partials/adminPartials/header.ejs') %>
+
+<div class="container-fluid py-4">
+  <a href="/admin/listBanner" class="btn btn-success">Back</a>
+  <div class="row">
+    <div class="col-12">
+      <div class="card my-4">
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+          <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+            <h6 class="text-white text-capitalize ps-3">Edit Banner</h6>
+          </div>
+        </div>
+        <div class="card-body px-5 pb-2">
+          <form action="" method="post" >
+            <div class="form-group mx-3 my-2 d-flex align-items-center justify-content-center">
+              <span class="font-weight-bolder" for="heading">Banner heading</span>
+              <input type="text" class="form-control px-1" id="heading" name="heading" value="<%= data.heading %>" required>
+            </div>
+
+            <div class="form-group mx-3 my-2 d-flex align-items-center justify-content-center">
+              <span class="font-weight-bolder" for="description">Description</span>
+              <input type="text" class="form-control px-1" id="description" name="description" value="<%= data.description %>" required>
+            </div>
+            
+            <!-- <div class="form-group mx-3 my-2 d-flex align-items-center justify-content-center">
+              <span class="font-weight-bolder" for="image">Image</span>
+              <input type="file" class="form-control px-1" id="image" name="image" multiple required>
+              <p id="para1" class="text-danger"></p>
+            </div> -->
+
+            <%
+            if(typeof message !== 'undefined'){
+              %>
+              <p id="para" style="color: red;"><%= message %></p>
+              <%
+            }
+            %>
+            <input class="btn btn-success my-3" type="submit" onclick="show()" value="Submit">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    function show(){
+      let category = document.getElementById('category').value;
+      let para = document.getElementById('para');
+      if(category!==String){
+        para.innerText = "Enter Something"
+      }
+    }
+</script>
+
+<%- include('../partials/adminPartials/footer.ejs') %>

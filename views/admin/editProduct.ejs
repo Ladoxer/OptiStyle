@@ -1,0 +1,145 @@
+<%- include('../partials/adminPartials/header.ejs') %>
+
+<div class="container-fluid py-4">
+  <a href="/admin/productList" class="btn btn-success">Back</a>
+  <div class="row">
+    <div class="col-12">
+      <div class="card my-4">
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+          <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+            <h6 class="text-white text-capitalize ps-3">Edit Product</h6>
+          </div>
+        </div>
+        <div class="card-body px-5 pb-2">
+          <form action="" method="post" enctype="multipart/form-data">
+            <div class="form-group mx-3 my-2 d-flex align-items-center justify-content-center">
+              <span class="font-weight-bolder" for="productName">Product Name</span>
+              <input type="text" class="form-control px-1" id="productName" name="productName" value="<%= productData.productName %>" required>
+              <p id="para1" class="text-danger"></p>
+            </div>
+
+            <div class="form-group mx-3 my-2 d-flex align-items-center justify-content-center">
+              <span for="status" class="font-weight-bolder" >Status</span>
+              <select name="status" id="status" class="form-control px-1">
+                <option >In Stock</option>
+                <option >Out Of Stock</option>
+              </select>
+            </div>
+
+            <div class="form-group mx-3 my-2 d-flex align-items-center justify-content-center">
+              <span class="font-weight-bolder" for="price">Price</span>
+              <input type="number" class="form-control px-1" id="price" name="price" value="<%= productData.price %>" required>
+              <p id="para2" class="text-danger"></p>
+            </div>
+
+            <div class="form-group mx-3 my-2 d-flex align-items-center justify-content-center">
+              <%
+              for(let i=0;i<productData.image.length;i++){
+                %>
+                <img style="width: 150px; height: 100px; margin: 20px;" src="/adminAsset/productImages/<%= productData.image[i] %>" alt="img">
+                <button type="button" class="btn btn-danger" onclick="remove('<%= productData._id %>','<%= i %>')" >x</button>
+                <%
+              }
+              %>
+            </div>
+            
+            <div class="form-group mx-3 my-2 d-flex align-items-center justify-content-center">
+              <span class="font-weight-bolder" for="image">Image</span>
+              <input type="file" multiple class="form-control px-1" id="image" name="image">
+              <p id="para3" class="text-danger"></p>
+            </div>
+
+            <div class="form-group mx-3 my-2 d-flex align-items-center justify-content-center">
+              <span class="font-weight-bolder" for="category">Category</span>
+              <select name="category" id="category" class="form-control px-1">
+                <%
+                if(category.length>0){
+                  %>
+                  <option value="<%= productData.category._id %>"><%= productData.category.categoryName %></option>
+                  <%
+                  for(let i=0;i<category.length;i++){
+                    %>
+                    <option value="<%= category[i]._id %>"><%= category[i].categoryName %></option>
+                    <%
+                  }
+                }
+                %>
+              </select>
+            </div>
+            
+            <div class="form-group mx-3 my-2 d-flex align-items-center justify-content-center">
+              <span class="font-weight-bolder" for="stockQuantity">Stock Quantity</span>
+              <input type="number" class="form-control px-1" id="stockQuantity" name="stockQuantity" value="<%= productData.stockQuantity %>" required>
+              <p id="para4" class="text-danger"></p>
+            </div>
+
+            <div class="form-group mx-3 my-2 d-flex align-items-center justify-content-center">
+              <span class="font-weight-bolder" for="description">description</span>
+              <input type="text" class="form-control px-1" id="description" name="description" value="<%= productData.description %>" required>
+              <p id="para5" class="text-danger"></p>
+            </div>
+
+            
+            <input class="btn btn-success my-3" type="submit" onclick="show()" value="Submit">
+            <%
+            if(typeof message !== 'undefined'){
+              %>
+              <p style="color: red;"><%= message %></p>
+              <%
+            }
+            %>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    function show(){
+      let input1 = document.getElementById('input1').value;
+    let para1 = document.getElementById('para1');
+    if(input1==''){
+      para1.innerText = "Enter something"
+    }
+    let input2 = document.getElementById('input2').value;
+    let para2 = document.getElementById('para2');
+    if(input2==''){
+      para2.innerText = "Enter something"
+    }
+    let input3 = document.getElementById('input3').value;
+    let para3 = document.getElementById('para3');
+    if(input3==''){
+      para3.innerText = "Enter something"
+    }
+    let input4 = document.getElementById('input4').value;
+    let para4 = document.getElementById('para4');
+    if(input4==''){
+      para4.innerText = "Enter something"
+    }
+    let para5 = document.getElementById('para4');
+    if(input5==''){
+      para5.innerText = "Enter something"
+    }
+    }
+
+    function remove(id,pos){
+      console.log('hello');
+      console.log(id,pos);
+      $.ajax({
+        url:"/admin/removeImage",
+        data:{
+          id:id,
+          pos:pos
+        },
+        method:"post",
+        success:(response)=>{
+          if(response.success){
+            location.reload()
+          }
+        }
+      })
+    }
+</script>
+
+<%- include('../partials/adminPartials/footer.ejs') %>

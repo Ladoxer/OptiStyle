@@ -1,0 +1,370 @@
+<%- include('../partials/userPartials/header.ejs') %>
+
+<!-- breadcrumb -->
+<div class="container pt-lg-5">
+	<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+		<a href="/" class="stext-109 cl8 hov-cl1 trans-04">
+			Home
+			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+		</a>
+
+		<span class="stext-109 cl4">
+				Checkout
+		</span>
+	</div>
+</div>
+
+<div class="container p-t-75 p-b-85">
+
+  <form action="" id="checkout-form">
+  <div class="row mb-5">
+    <div class="col-12 col-md-6">
+      <div class="row" style="display: flex; justify-content: space-between;">
+          <div class="col-6 col-md-12" >
+              <h3 class="mb-4 mt-3">LOGIN</h3>
+              <p class=""><span>Name</span>:&nbsp;&nbsp;&nbsp;<span style="color: black;"><%=userName.name%></span></p>
+              <p class="mb-4"><span>Email</span>:&nbsp;&nbsp;&nbsp;<span style="color: black;"><%=userName.email%></span></p>
+              <p><a href="/logout" class="btn-custom">Logout and sign in to another account</a></p>
+          </div>
+          <div class="col-6 col-md-12 text-bolder text-dark">
+              <p class="mb-4 mt-3" style="color: rgb(112, 101, 101);">Advantages of Secure Login</p>
+              <br>
+              <p class="m-0">Easy Trach Orders,Hassle free Returns</p>
+              <p class="m-0">Get Relevant Alerts and Recommentation</p>
+              <p class="m-0">Wishlists,Reviews,Rating and More</p>
+          </div>
+      </div>
+
+      <div class="m-3 p-2" style="background-color: rgb(235, 235, 235);">
+        <a href="/addAddress" class="btn btn-info m-5">Add Address</a>
+        <div class="row">
+          
+            <div class="row">
+           <%
+           if(address != 0){
+              address.forEach((add)=>{
+                %>
+                 <div class="col-md-12 d-flex ftco-animate mb-4 px-5">
+                  <div class="col-md-1">
+                    <input type="radio" value="<%=add.userName%>,<%=add.address%>,<%=add.city%>,<%=add.state%>,<%=add.pincode%>" name="selectAddress">
+                  </div>
+                    <div class="blog-entry align-self-stretch">
+                      <div class="text d-block pl-md-4">
+                        <div class="meta">
+                          <div><p><span style="color: black;">Name: </span><%=add.userName%></p></div><br>
+                          <div><p><span style="color: black;">Mobile: </span><%=add.mobile%></p></div><br>
+                          <div><p><span style="color: black;">Alternative Number: </span><%=add.alternativeMob%></p></div><br>
+                        </div>
+                        <h3 class="heading" style="color: #dbcc8f;"><p>ADDRESS</p></h3>
+                        <p><%=add.address%> <%=add.city%> <%=add.state%> <%=add.pincode%></p>
+                        <p><%=add.landmark%></p>
+                        
+                        <p><a href="/removeAddress?id=<%=add._id%>" class="btn btn-danger py-2 px-3">Remove Address</a></p>
+                      </div>
+                    </div>
+                  </div>
+                
+             
+                <%
+              })
+           }else{
+            %>
+            <div class="row">
+              <p class="pl-5" style="color: red;"><%=message%></p>
+            </div>
+            <%
+           }
+           %>
+        
+      </div>
+      </div>
+    </div>
+
+    </div>
+
+    <div class="col-12 col-md-6 pl-md-5">
+      <div>
+        <div  class="col-6  mt-5 cart-wrap ftco-animate card px-5 py-4">
+          <div class="cart-total mb-3">
+            <h2 class="mb-4" style="color: #dbcc8f;">Cart Totals</h2>
+            <p class="d-flex justify-content-between">
+              <span>Subtotal</span>
+              <span>₹ <%= totalPriceUpdate %></span>
+            </p>
+            <p class="d-flex justify-content-between">
+              <span>Delivery</span>
+              <span>₹0.00</span>
+            </p>
+            <hr>
+            <p class="d-flex total-price justify-content-between">
+              <span>Total</span>
+              <span>₹ <span id="gt2"><%= totalPriceUpdate %></span></span>
+            </p>
+          </div>
+        </div>
+       <!-- <div class="col-6 mt-5 cart-wrap ftco-animate card px-5 py-4">
+          <div class="cart-total mb-3 outline">
+            <h2 class="mb-4" style="color: #dbcc8f;">Apply coupon</h2>
+            
+              <label for="coupon" style="color: black;" class="mb-4 ml-2">Coupon Code</label>
+              <input style="border: 1px solid rgb(172, 172, 172);margin: 10px;border-radius: 8px;padding: 8px;" id="code" type="text" placeholder="enter coupon code">
+              <button type="button" class="btn btn-success ml-2 px-5" onclick="applycoupon($('#code').val())">Apply</button>
+            
+            <hr>
+            <p class="d-flex total-price justify-content-between">
+              <span>Total</span>
+              <span>$ <span id="gt2"><%= totalPriceUpdate %></span></span>
+            </p>
+            <p class="d-flex total-price justify-content-between">
+              <span>discount</span>
+              <span id="gt3">0</span>
+            </p>
+            <hr>
+            <p class="d-flex total-price justify-content-between">
+              <span>Wallet</span>
+              <span id="gt5"><%=userName.wallet%></span>
+            </p>
+            <hr>
+            <p class="d-flex total-price justify-content-between">
+              <span>Total</span>
+              <span>$ <span id="gt4"><%= totalPriceUpdate %></span></span>
+            </p>
+          </div>
+        </div> -->
+      </div>
+    </div>
+
+  </div>
+  
+
+  
+  
+  
+
+
+  
+  <div class="d-flex row justify-content-center">
+    <div class="col-6 card">
+    <div class="row">
+        <div class="px-5 py-4 d-flex flex-column "> 
+            <h3 class="mb-4 mt-3">PAYMENT</h3>
+            <div class="mb-5 d-flex justify-content-start">
+              <input type="radio" id="COD" value="COD" name="payment">
+              <div class="ml-3">
+                <label for="COD" style="color: black;margin: 0;">COD</label>
+                <small>Free delivery charge</small>
+              </div>
+            </div>
+            <div class="mb-5 d-flex justify-content-start">
+              <input type="radio" id="onlinePayment" value="onlinePayment" name="payment">
+              <div class="ml-3">
+                <label for="onlinePayment" style="color: black;margin: 0;">Online Payment</label>
+                <small>UPI,Net Banking,Credit Card...</small>
+              </div>
+            </div>
+        </div>
+    </div>
+    <div class="mb-5 ml-5">
+      <button style="font-size: 20px;padding: 10px 80px 10px 80px;" type="submit" class="btn btn-success">Place Order</button>
+  </div>
+  </form>
+    </div>
+  </div>
+  <div class="col-6 mt-5 cart-wrap ftco-animate card px-5 py-4">
+    <div class="cart-total mb-3 outline">
+      <h2 class="mb-4" style="color: #dbcc8f;">Apply coupon</h2>
+      
+              <form action="">
+              <label for="coupon" style="color: black;" class="mb-4 ml-2">Coupon Code</label>
+              <input style="border: 1px solid rgb(172, 172, 172);margin: 10px;border-radius: 8px;padding: 8px;" id="code" type="text" placeholder="enter coupon code">
+              <button type="button" class="btn btn-success ml-2 px-5" onclick="applycoupon($('#code').val())">Apply</button>
+              </form>
+
+            <hr>
+            <p class="d-flex total-price justify-content-between">
+              <span>Total</span>
+              <span>₹ <span id="gt2"><%= totalPriceUpdate %></span></span>
+            </p>
+            <p class="d-flex total-price justify-content-between">
+              <span>discount</span>
+              <span id="gt3">0</span>
+            </p>
+            <hr>
+            <p class="d-flex total-price justify-content-between">
+              <span>Wallet</span>
+              <span id="gt5"><%=userName.wallet%></span>
+            </p>
+            <hr>
+            <p class="d-flex total-price justify-content-between">
+              <span>Total</span>
+              <span>₹ <span id="gt4"><%= totalPriceUpdate %></span></span>
+            </p>
+          </div>
+
+        </div>
+
+
+
+</div>
+  </div>
+  
+
+
+
+<script>
+  $("#checkout-form").submit((e)=>{
+    
+    const amount = document.getElementById('gt4').innerHTML;
+    const amount2 = document.getElementById('gt2').innerHTML;
+    console.log(amount2);
+    const discount = document.getElementById('gt3').innerHTML;
+    let address = $("input[name=selectAddress]:checked").val();
+    let payment = $("input[name=payment]:checked").val();
+    e.preventDefault();
+    $.ajax({
+      url:"/checkout",
+      method:"post",
+      data:{
+        amount,
+        total:amount2,
+        discount,
+        address,
+        payment
+      },
+      success:(responce)=>{
+        if(responce.codSuccess === true){
+          location.href = "/orderSuccess";
+        }else{
+          razorpayPayment(responce.order);
+        }
+      }
+    })
+  })
+
+  function razorpayPayment(order){
+
+
+    var options = {
+              "key": "rzp_test_NOvxLkFB5JGvn6", // Enter the Key ID generated from the Dashboard
+              "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+              "currency": "INR",
+              "name": "Ladde Corp", //your business name
+              "description": "Test Transaction",
+              "image": "https://example.com/your_logo",
+              "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+              "handler": function (response){
+                  verifyPayment(response, order);
+              },
+              "prefill": {
+                  "name": "Gaurav Kumar", //your customer's name
+                  "email": "gaurav.kumar@example.com",
+                  "contact": "9000090000"
+              },
+              "notes": {
+                  "address": "Razorpay Corporate Office"
+              },
+              "theme": {
+                  "color": "#3399cc"
+              }
+          };
+          console.log("hi");
+          var rzp1 = new Razorpay(options);
+          rzp1.open();
+  }
+  function verifyPayment(payment,order){
+    const amount = document.getElementById("gt4").innerHTML;
+    const amount2 = document.getElementById("gt2").innerHTML;
+    $.ajax({
+      url:"/verifyPayment",
+      method:"post",
+      data:{
+        payment,
+        amount,
+        amount2,
+        order
+      },
+      success:(responce)=>{
+        if(responce.success){
+          location.href = '/orderSuccess';
+        }else{
+          alert('payment failed');
+        }
+      }
+    })
+  }
+
+
+  function applycoupon(code){
+    const amount = document.getElementById('gt4').innerHTML;
+    console.log(amount);
+    $.ajax({
+      url:"/applyCoupon",
+      data:{
+        code:code,
+        amount:amount,
+      },
+      method:"post",
+      success:(response)=>{
+        console.log(response);
+        if(response.user){
+          console.log("This User already used this coupon");
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'This coupon already used!'
+          })
+        }else if(response.limit){
+          console.log("coupon limit exceeded");
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'coupon limit exceeded!'
+          })
+        }else if(response.status){
+          console.log('This coupon now not in use');
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'This coupon now not in use'
+          })
+        }else if(response.cartAmount){
+          console.log("You can't use the coupon...Buy more");
+          Swal.fire({
+            icon:'error',
+            title:'Oops',
+            text: "You can't use the coupon...Buy more"
+          })
+        }else if(response.date){
+          console.log("coupon date expired");
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops',
+            text: "coupon date expired"
+          })
+        }else if(response.amountOkey){
+          console.log("discount granded");
+          document.getElementById('gt3').innerHTML = response.disAmount;
+          document.getElementById('gt4').innerHTML = response.disTotal
+          console.log('done');
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Discount redeemed',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }else if(response.invalid){
+          console.log("invalid coupon");
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops',
+            text: 'invalid Coupon!!!'
+          })
+        }
+      }
+    })
+  }
+
+</script>
+
+<%- include('../partials/userPartials/footer.ejs') %>

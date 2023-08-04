@@ -1,0 +1,104 @@
+<%- include('../partials/adminPartials/header.ejs') %>
+
+<div class="container-fluid py-4">
+  <a class="btn btn-success" href="/admin/addProduct">Add</a>
+  <div class="row">
+    <div class="col-12">
+      <div class="card my-4">
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+          <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+            <h6 class="text-white text-capitalize ps-3">Table of products</h6>
+          </div>
+        </div>
+        <div class="card-body px-0 pb-2">
+          <div class="table-responsive p-0">
+            <table class="table align-items-center mb-0">
+              <thead>
+                <tr>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Product Name</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Price</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Category</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Quantity</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">List/Unlist</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">List Action</th>
+                </tr>
+              </thead>
+              <tbody>
+              
+                  <% 
+                    if(products.length>0){
+                      for(let i=0;i<products.length;i++){
+                        %>
+                        <tr>
+                  <td class="text-center">
+                    <div class="d-flex px-2 py-1">
+                      <div class="relative w-8 h-8 mr-3 rounded-full md:block">
+                        <img style="width: 200px; height: 200px;"  class="object-cover w-full h-full rounded-full" src="/adminAsset/productImages/<%=products[i].image[0]%>" alt="s" loading="lazy">
+                      </div>
+                      <div>
+                        <p class="font-semibold"><%=products[i].productName%></p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="text-xs font-weight-bold mb-0"><%= products[i].price %></p>
+                  </td>
+                  <td class="text-center">
+                    <p class="text-xs font-weight-bold mb-0"><%= products[i].category.categoryName %></p>
+                  </td>
+                  <td class="text-center">
+                    <p class="text-xs font-weight-bold mb-0"><%= products[i].stockQuantity %></p>
+                  </td>
+                  <td class="text-center">
+                    <p class="text-xs font-weight-bold mb-0"><%= products[i].status %></p>
+                  </td>
+                  <td class="text-center ">
+                    <a href="/admin/editProduct?id=<%=products[i]._id%>" class="btn btn-success" data-toggle="tooltip" data-original-title="Edit user">
+                      Edit
+                    </a>
+                  </td>
+                  <td class="text-center">
+                    <p class="text-xs font-weight-bold mb-0"><%= products[i].list %></p>
+                  </td>
+                  <td class="text-center ">
+                    <%
+                    if(products[i].list){
+                      %>
+                      <a href="/admin/blockProduct?id=<%=products[i]._id%>" class="btn btn-danger" data-toggle="tooltip" data-original-title="Edit user">
+                      Unlist
+                    </a>
+                      <%
+                    }else{
+                      %>
+                      <a href="/admin/unblockProduct?id=<%=products[i]._id%>" class="btn btn-success" data-toggle="tooltip" data-original-title="Edit user">
+                      List
+                    </a>
+                      <%
+                    }
+                    %>
+                  </td>
+                        </tr>
+                        <%
+                      }
+                    }else{
+                      %>
+                      <tr>
+                        <td>
+                    <p class="font-weight-bold mb-0">Products not found</p>
+                  </td>
+                      </tr>
+                      <%
+                    }  
+                  %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/adminPartials/footer.ejs') %>

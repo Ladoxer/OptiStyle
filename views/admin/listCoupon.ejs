@@ -1,0 +1,97 @@
+<%- include('../partials/adminPartials/header.ejs') %>
+
+<div class="container-fluid py-4">
+  <a href="/admin/addCoupon" class="btn btn-success">Add</a>
+  <div class="row">
+    <div class="col-12">
+      <div class="card my-4">
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+          <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+            <h6 class="text-white text-capitalize ps-3">Table of Coupons</h6>
+          </div>
+        </div>
+        <div class="card-body px-0 pb-2">
+          <div class="table-responsive p-0">
+            <table class="table align-items-center mb-0">
+              <thead>
+                <tr>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Coupon Code</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Discount Amount</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Expiry Date</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Max Cart Amount</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Max discount</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Limit</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+              
+                  <% 
+                    if(couponData.length>0){
+                      for(let i=0;i<couponData.length;i++){
+                        %>
+                        <tr>
+                  <td class="text-center">
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm"><%= couponData[i].code %></h6>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td class="text-center">
+                    <p class="text-xs font-weight-bold mb-0"><%= couponData[i].discountAmount %>(<%= couponData[i].discountType %>)</p>
+                  </td>
+
+                  <td class="text-center">
+                    <p class="text-xs font-weight-bold mb-0"><%= couponData[i].expiryDate.toISOString().substring(0,10) %></p>
+                  </td>
+
+                  <td class="text-center">
+                    <p class="text-xs font-weight-bold mb-0"><%= couponData[i].maxCartAmount %></p>
+                  </td>
+
+                  <td class="text-center">
+                    <p class="text-xs font-weight-bold mb-0"><%= couponData[i].maxDiscountAmount %></p>
+                  </td>
+
+                  <td class="text-center">
+                    <p class="text-xs font-weight-bold mb-0"><%= couponData[i].maxUsers %></p>
+                  </td>
+
+                  <td class="text-center">
+                    <p class="text-xs font-weight-bold mb-0"><%= couponData[i].status %></p>
+                  </td>
+
+                  <td class="text-center ">
+                    <a href="/admin/editCoupon?id=<%=couponData[i]._id%>" class="btn btn-success" data-toggle="tooltip" data-original-title="Edit user">
+                      Edit
+                    </a>
+                    <a href="/admin/deleteCoupon?id=<%=couponData[i]._id%>" class="btn btn-danger" data-toggle="tooltip" data-original-title="Edit user">
+                      Delete
+                    </a>
+                  </td>
+
+                        <%
+                }
+                    }else{
+                      %>
+                      <tr>
+                        <td>
+                    <p class="font-weight-bold mb-0 text-center">Coupon not found</p>
+                  </td>
+                      </tr>
+                      <%
+                    }  
+                  %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/adminPartials/footer.ejs') %>

@@ -10,7 +10,6 @@ const couponController = require('../controllers/couponController');
 const bannerController = require('../controllers/bannerController');
 const offerController = require('../controllers/offerContoller');
 const path = require('path');
-const config = require('../config/config');
 const upload = require('../config/multer').upload;
 const session = require('express-session');
 const auth = require('../middleware/adminauth');

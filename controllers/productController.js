@@ -3,7 +3,6 @@ const Category = require('../models/categoryModel');
 const Product = require('../models/productModel');
 const ProductOffer = require('../models/productOfferModel');
 const Offer = require('../models/offerModel');
-const { render } = require('../routes/userRoute');
 
 const loadProductList = async(req,res,next)=>{
   try {

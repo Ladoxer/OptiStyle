@@ -1,7 +1,8 @@
 const express = require('express');
 const userRoute = express();
+const dotenv = require('dotenv');
+dotenv.config();
 const path = require('path');
-const config = require('../config/config');
 const userController = require('../controllers/userController');
 const categoryController = require('../controllers/categoryController');
 const cartController = require('../controllers/cartController');
@@ -13,7 +14,7 @@ const session = require('express-session');
 const auth = require('../middleware/auth');
 
 userRoute.use(session({
-  secret:config.sessionSecret,
+  secret:process.env.SECRET_KEY,
   saveUninitialized:true,
   resave:false
 }));

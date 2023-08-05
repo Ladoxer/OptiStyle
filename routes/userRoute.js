@@ -25,6 +25,7 @@ userRoute.set('views',path.join(__dirname,'../views/user'));
 // get methods
 userRoute.get('/signup',userController.loadSignUp);
 userRoute.get('/signin',auth.isLogout,userController.loadSignIn);
+userRoute.get('/contact',userController.loadcontactUs);
 userRoute.get('/',userController.loadHome);
 userRoute.get('/home',userController.loadHome);
 userRoute.get('/productDetail',productController.loadShowProduct);

@@ -463,6 +463,23 @@ const loadShop = async(req,res,next)=>{
   }
 }
 
+const loadcontactUs = async(req,res,next)=>{
+  try {
+    if(req.session.user_id){
+      const customer=true;
+      res.render('contact',{customer});
+      return
+    }else{
+      const customer=false;
+      res.render('contact',{customer});
+      return
+    }
+  } catch (error) {
+    console.log(error.message);
+    next(error);
+  }
+} 
+
 module.exports = {
   loadSignUp,
   insertUser,
@@ -476,4 +493,5 @@ module.exports = {
   loadEditProfile,
   postEditProfile,
   loadShop,
+  loadcontactUs
 };

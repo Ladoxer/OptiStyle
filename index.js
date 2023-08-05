@@ -34,8 +34,8 @@ app.use('/admin',adminRoute);
 
 // for error 
 app.use(errorHandlers.error404);
-app.use(errorHandlers.error500);
-app.use(errorHandlers.error502);
+// app.use(errorHandlers.error500);
+// app.use(errorHandlers.error502);
 
 
 app.listen(process.env.PORT, () => {

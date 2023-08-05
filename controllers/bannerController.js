@@ -8,7 +8,8 @@ const listBanner = async(req,res,next)=>{
     console.log(bannerData);
     res.render('listbanner',{banner:bannerData,url});
   } catch (error) {
-    next(error);
+    console.log(error.message);
+    // next(error);
   }
 }
 

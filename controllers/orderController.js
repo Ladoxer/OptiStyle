@@ -239,7 +239,7 @@ const getSalesReport = async(req,res,next)=>{
     if(isNaN(page) || page < 1){
       page = 1;
     }
-    const conditions = {}
+    const conditions = {status:"Delivered"}
     if(from && to){
       conditions.date = {
         $gte:from,

@@ -6,7 +6,7 @@ const listBanner = async(req,res,next)=>{
     const url = req.url;
     const bannerData = await Banner.find({});
     console.log(bannerData);
-    res.render('listbanner',{banner:bannerData,url});
+    res.render('listBanner',{banner:bannerData,url});
   } catch (error) {
     console.log(error.message);
     // next(error);

@@ -82,7 +82,7 @@ const orderSuccess = async(req,res,next)=>{
     const userName = await User.findOne({_id:req.session.user_id});
     if(req.session.user_id){
       let customer = true;
-      res.render('ordersuccess',{userName,customer});
+      res.render('orderSuccess',{userName,customer});
     }
   } catch (error) {
     console.log(error.message);

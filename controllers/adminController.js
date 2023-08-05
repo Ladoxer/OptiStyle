@@ -145,10 +145,26 @@ const blockUser = async(req,res,next)=>{
       res.redirect('/admin/userList');
     }else{
       await User.findByIdAndUpdate({_id:id},{$set:{is_blocked:true}});
+
+      if(req.session.user_id === id){
+        delete req.session.user_id;
+      }
+
+
+      const sessions = req.sessionStore.sessions;
+      for(const sessionId in sessions){
+        const session = JSON.parse(sessions[sessionId]);
+        if(session.user_id === id){
+          delete sessions[sessionId];
+          break;
+        }
+      }
+
       res.redirect('/admin/userList');
     }
 
   } catch (error) {
+    console.log(error.message);
     next(error);
   }
 }

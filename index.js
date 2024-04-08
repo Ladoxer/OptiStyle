@@ -8,6 +8,8 @@ const userRoute = require("./routes/userRoute");
 const adminRoute = require('./routes/adminRoute');
 const errorHandlers = require('./middleware/errorHandler');
 
+const job = require('./config/job');
+
 
 
 // to middleware
